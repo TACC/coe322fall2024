@@ -1,0 +1,8 @@
+## assume that you are *outside* your source directory
+
+rm -rf build
+mdir build
+cd build
+cmake -D CMAKE_INSTALL_PREFIX=../install ../yoursourcedirectory
+make
+make install
