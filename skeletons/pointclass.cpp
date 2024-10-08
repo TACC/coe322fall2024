@@ -21,6 +21,7 @@ private:
 public:
   Point(float in_x,float in_y) {
     x = in_x; y = in_y; };
+  float get_x() { return x; }; // don't use this too much
   float distance_to_origin();
   float angle( /* no x or y here! */ ) {
     return atan(y/x); // atan2(y,x)
@@ -35,6 +36,18 @@ public:
     float a = angle(); // equiv to: (*this).angle();
     return 2*a;
   };
+};
+
+class Rectangle {
+private:
+  Point botleft;
+  float w,h;
+public:
+  Rectangle( Point botleft, float w,float h )
+    : botleft(botleft),w(w),h(h) {};
+  Rectangle( Point botleft,Point topright )
+    ??????
+  float rightedge_x() { return botleft.get_x()+w; };
 };
 
 int main() {
@@ -57,3 +70,11 @@ float Point::distance_to_origin() {
 
 // C-x 3 : vert split
 // C-x 2 : horiz split
+// C-x o : go to other pane
+// C-x 1 : make this the only pane
+// C-x 0 : delete this pane
+
+// C-l : current line to middle / top / bot of the screen
+
+// C-v : screen down
+
