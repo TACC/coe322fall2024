@@ -2,24 +2,19 @@
  ****
  **** This file belongs with the course
  **** Introduction to Scientific Programming in C++/Fortran2003
- **** copyright 2017-2023 Victor Eijkhout eijkhout@tacc.utexas.edu
+ **** copyright 2017-2024 Victor Eijkhout eijkhout@tacc.utexas.edu
  ****
- **** link.cxx : linked list using shared smart pointers
+ **** linkshared.cpp : linked list using shared smart pointers
  ****
  ****************************************************************/
 
 #include <cmath>
 
 #include <iostream>
-using std::cin;
-using std::cout;
+using std::cin, std::cout;
 
 #include <memory>
-using std::make_shared;
-using std::shared_ptr;
-
-#include <vector>
-using std::vector;
+using std::make_shared, std::shared_ptr;
 
 #include <cassert>
 
