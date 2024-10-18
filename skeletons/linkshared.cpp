@@ -49,6 +49,7 @@ public:
     return datacount; };
   bool has_next() {
     return next!=nullptr; };
+  bool contains_value(int v);
   void insert(int value);
   void print();
 };
@@ -147,7 +148,6 @@ int main() {
  * See below for an iterative solution
  */
 int List::length() {
-  int count = 0;
   if (head==nullptr)
     return 0;
   else
