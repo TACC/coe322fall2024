@@ -40,14 +40,23 @@ public:
 
 class Rectangle {
 private:
-  Point botleft;
+  Point botleft; // this would use the def constructor
   float w,h;
 public:
-  Rectangle( Point botleft, float w,float h )
-    : botleft(botleft),w(w),h(h) {};
-  Rectangle( Point botleft,Point topright )
-    ??????
+  Rectangle( Point bl, float ww,float hh ) 
+    : botleft(bl) // this initialization
+      // , w(ww) <= you should also do this
+  { w=ww; h=hh; // this is NOT initialization
+    // and you should really use member initializers
+  };
   float rightedge_x() { return botleft.get_x()+w; };
+  float area() { return w*h; };
+};
+
+class Square : public Rectangle {
+public:
+  Square( Point bl, float side )
+    : Rectangle( bl,side,side ) {};
 };
 
 int main() {
@@ -60,6 +69,9 @@ int main() {
   p1.distance(q);
 
   cout << p1.twice_the_angle() << '\n';
+
+  Square s( p1,2 );
+  cout << s.area() << '\n';
 
   return 0;
 }

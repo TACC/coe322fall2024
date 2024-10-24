@@ -1,5 +1,6 @@
 cmake_minimum_required( VERSION 3.20 )
 project( ${PROJECT_NAME} VERSION 1.0 )
+#project( require VERSION 1.0 )
 
 message( "Using sources: ${PROJECT_NAME}.cpp ${EXTRA_SOURCES}" )
 add_executable( ${PROJECT_NAME} )
