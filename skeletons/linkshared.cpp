@@ -47,6 +47,7 @@ public:
   int length();
   int count() {
     return datacount; };
+  bool contains_value(int v); // <<<<< needs to be added
   bool has_next() {
     return next!=nullptr; };
   bool contains_value(int v);
@@ -64,6 +65,7 @@ int main() {
   mylist.insert(3);
   cout << "After inserting 3 the length is: "
        << mylist.length() << '\n';
+
   if (mylist.contains_value(3))
     cout << "Indeed: contains 3" << '\n';
   else
@@ -98,6 +100,7 @@ int main() {
   else
     cout << "Hm. Should contain 3" << '\n';
   cout << '\n';
+#if 0
 
   mylist.insert(6);
   cout << "Inserting 6 goes at the tail;\nnow the length is: "
@@ -139,6 +142,7 @@ int main() {
     }
     mylist.print();
   }
+#endif
   
   return 0;
 }
@@ -193,4 +197,31 @@ void List::print() {
   cout << '\n';
 };
 
+void List::insert(int value) {
+  if (head==nullptr)
+    head = make_shared<Node>(value);
+  else head->insert(value);
+};
+
+void Node::insert(int value) {
+  if (value==datavalue)
+    datacount++;
+  else throw 1; // < placeholder for missing function
+};
+
+bool List::contains_value(int v) {
+  if (head==nullptr)
+    return false;
+  else
+    return head->contains_value(v);
+};
+
+bool Node::contains_value(int v) {
+  if (datavalue==v)
+    return true;
+  else if (next==nullptr)
+    return false;
+  else
+    return next->contains_value(v);
+};
 
