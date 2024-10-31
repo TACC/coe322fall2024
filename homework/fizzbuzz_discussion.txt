@@ -1,0 +1,23 @@
+================ proper use of initializer
+
+        if (int number = read_number();int(number) % 3 == 0 && int(number) % 5 == 0) { 
+            cout << "Fizzbuzz!" << endl; 
+        } else /* et cetera */
+
+================ kinda
+
+    int num = read_number();
+
+    if (int n = num; n % 3 == 0 && n % 5 == 0) {
+
+This still leaves you with a variable that's defined outside the conditional
+
+================ no, it's not a commandine argument
+
+    int n = std::atoi(argv[1]);  // Convert the input to an integer                                                                             
+
+  if (n%15==0) { //if number is divisible by 15                                                    
+
+================ ultra-fancy (professor's solution)
+
+if ( int n = [] () { int n; cin >> n; return n; }(); n%15 /* et cetera */
