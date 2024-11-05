@@ -1,0 +1,56 @@
+================ basic idea of computing roots
+
+Capture the number of which you want the square root.
+
+    for (int n=2; n<=8; ++n){
+        //using capture to make f dependent on the integer parameter
+        auto f = [n] ( double x ) { return x*x-n; };
+
+================ polymorphism
+
+double newton_root(function< double(double)> f) {
+  // fixed value of h, the increment for the finite difference of f prime:
+  double h = 1.e-6;
+  // use lambda for derivative for derivative and call prev. newton_root function:
+  return newton_root(f, [f, h] (double x) {return (f(x + h) - f(x)) / h;});
+}
+
+================ also good
+
+Note the "[=]" which captures everything, by value
+
+double newton_root(function <double(double)> f)
+{
+  double h = 1e-6;
+  auto gradient = [=] (double x) {return (f(x + h) - f(x))/h; };
+  return newton_root(f, gradient);
+}
+
+
+================ double implementation, not optimal
+
+double newton_root( function< double(double) > f) 
+{
+  double currx = 10000000;
+  double funcval = f(currx);
+	
+  for (int iter_s = 0; ; ++iter_s)
+    {
+      currx -= f(currx)/(2*currx);
+      if (std::abs(funcval)<1.e-5)
+	{ break;}
+    }
+  return currx;
+}
+
+================ I'd rather see a lambda
+
+double fin_difference(function<double(double)> f, double x, double h = 1e-6)
+{
+    return (f(x+h)-f(x+h))/(2*h);
+}
+double newton_root(function<double(double)> f)
+{  
+    for(int i = 0; ; ++i)
+    {
+        auto deriv = [f, current_x] {return fin_difference(f, current_x);};
