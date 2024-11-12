@@ -30,7 +30,11 @@ double discriminant
   return b*b-4*a*c;
 }
 
+// assuming there are two roots, return as pair
+pair<double,double> abc_roots( quadratic q );
 
+// say either "one" or "two", or say nothing
+optional<string> how_many_roots( quadratic q );
 
 
 int main() {
@@ -83,3 +87,5 @@ int main() {
 
   return 0;
 }
+
+
