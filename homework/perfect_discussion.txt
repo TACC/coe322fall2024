@@ -1,0 +1,54 @@
+================ along these lines
+
+  int check = 1E4;
+  auto nums = ranges::views::iota(2,check);
+     ranges::for_each
+     (nums,  [] (int i) {
+      int total = 1;
+      auto divisors = ranges::views::iota(2,i);
+      ranges::for_each
+      (divisors, [&total,i] (int j){
+	if (i % j == 0){
+	  total +=  j;
+	}
+      });
+      if ( i == total ) {
+	cout << i << " is a perfect number" << "\n";
+      }
+     });
+
+================ built up from pieces
+
+  auto divisor_sum = [](int number) {
+        auto potential_divisors = rng::views::iota(1, number); 
+        auto actual_divisors = rng::views::filter(potential_divisors,
+	    [number](int candidate) { return number % candidate == 0; });
+        int total_sum = 0;
+        for_each(actual_divisors, [&total_sum](int divisor) { total_sum += divisor; });
+        return total_sum;
+    };
+
+    auto candidate_numbers = rng::views::iota(2, 100000);
+    auto perfect_numbers = candidate_numbers
+        | rng::views::filter([&divisor_sum](int candidate) { 
+            return divisor_sum(candidate) == candidate;
+        })
+      | rng::views::take(4);
+
+   
+    rng::for_each(perfect_numbers,
+	[](int perfect_num) {
+              cout << perfect_num << endl;
+    });
+
+================ using accumulate
+
+which we didn't do in class but it's in the slides
+
+    auto n_values = std::views::iota(1, 10000);
+    auto divisor_sums = n_values 
+        | std::views::transform([](int n) {
+            auto divisors = std::views::iota(1, n) 
+                | std::views::filter([n](int i) { return n % i == 0; }); 
+            return std::accumulate(divisors.begin(), divisors.end(), 0); 
+
