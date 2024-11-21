@@ -8,3 +8,8 @@ find_package( Eigen3 REQUIRED  )
 target_link_libraries( ${PROJECTNAME} PUBLIC Eigen3::Eigen )
 
 install( TARGETS ${PROJECTNAME} DESTINATION . )
+
+# emacs:
+## ESC x repl<sp>st<sp>
+# vi:
+## 1,$s/oldstring/newstring/g
